@@ -1,0 +1,476 @@
+400
+401
+404
+// Backup copy  //
+
+
+<aura:component  implements="force:hasRecordId,force:appHostable,flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global">
+    
+    
+    
+    <!-- <aura:handler name="init" value="{!this}" action="{!c.fetchListOfRecordTypes}"/> -->
+    
+    <aura:attribute name="lstOfRecordType" type="String[]" />
+    <aura:attribute name="isOpen" type="boolean" default="false" />
+    <aura:attribute name="isOpenh" type="boolean" default="false" />
+    <aura:attribute name ="isbutton" type="boolean" default="true"/>
+    <aura:if isTrue="{!v.isbutton}">
+        <div class="slds-m-around--x-large">
+            <lightning:button label="Austin-San Antonio" onclick="{!c.openModal}" /><br/><br/>
+            <lightning:button label="Houston" onclick="{!c.closeModal}" />
+            
+        </div>  
+    </aura:if>
+    <!-- Model Box Start -->    
+    <aura:if isTrue="{!v.isOpen}">
+        <div class="slds-modal__content slds-p-around_large modal-body2" id="modal-content-id-1">
+            <div class="header">
+                <table border="0" width="{!if($User.UITheme == 'Theme4t','100%','100%')}" cellspacing="0">
+                    <tr>
+                        <td width="17%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            
+                            
+                            <img src="{!$Resource.Track_Logo}"  align="left" />
+                        </td>
+                        <td width="66%" style="padding-top:4px;background-color:#ffffff">
+                            <b style="{!if($User.UITheme == 'Theme4t','font-size:5px;','font-size:12px;')}"><center>50009 - WASTE HAULAGE PROCEDURES &amp; RESPONSIBILITIES</center></b>
+                        </td>
+                        <td width="17%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            
+                            <img src="{!$Resource.Track_Logo}"  align="right" />
+                        </td>
+                    </tr>
+         
+   
+                </table>
+                
+            </div>
+         
+        <div >
+      
+
+             <lightning:input name="text-12"  placeholder="Search.." class ="customInput" aura:id="text-12" value=""  onchange="{!c.searchButtonClick}"/>
+         
+            </div>  
+            <div id="realTimeContents">
+            <p style="font-size:85%;font-family:Arial;line-height:115%;" >
+                <br/><br/>1.  For support call or text the Haulbrooke Employee Support line: <a href="tel:210-468-8033" target="_blank">210-468-8033</a>.<br/><br/>
+                2. Photos solve questions &amp; problems, please take them to provide to dispatch – some examples below:
+                <br/><span class="space"></span>a) Dumpster location
+                <br/><span class="space"></span>b) Photo of the dumpster ID,
+                <br/><span class="space"></span>c) Any accidents or tire scuffs on the property or neighboring properties,
+                <br/><span class="space"></span>d) Any trash that falls out when loading / tarping the dumpster,
+                <br/><span class="space"></span>e) Any obvious damage / graffiti to the dumpster since it has been there,
+                <br/><span class="space"></span>f) Any contents not allowed at the landfills. 
+                <br/><span class="space"></span>g) Photos you take on your phone can be deleted 24 hours later. 
+                <br/><br/>3. A dash camera is fitted for your protection. If the camera is found to be off, missing or damaged, the cost of the unit will be deducted from your pay ($450), to avoid this, report immediately to Dispatch if you see the camera is missing/damaged.
+                <br/><br/>
+                4.  You will receive communication via text daily from the office, but texting and driving is not permitted. Make sure your cell phone is within close enough proximity that it is operable while the driver is restrained by properly installed and adjusted seat belts - where you are able to initiate, answer, or terminate a call by touching a single button. Use an earpiece or the speaker phone function. Use voice-activated dialing. Use the hands-free feature. No reaching, no holding, no dialing, no texting, no reading.
+                <br/><br/>
+                5.  Ensure the dumpster is secured on the truck before moving. That includes the rear of the dumpster wings being under the hold brackets, and / or the rear of the dumpster being secured by straps or a chain.
+                <br/><br/>
+                6.  Please use this link to view locations to empty at: <a href="https://www.google.com/maps/d/u/0/edit?mid=17HU0aM346Glx86-3taWi1PRAKNWJW_s&amp;usp=sharing" target="_blank">https://www.google.com/maps/d/u/0/edit?mid=17HU0aM346Glx86-3taWi1PRAKNWJW_s&amp;usp=sharing</a>
+                <br/><br/>
+                7. Prohibited Items – in our customer terms and conditions we ask for them not to put the following items into our dumpsters, if you do see any of these items in there, please upload a photo showing what’s in the dumpster under the Prohibited Photo section  – send this before you pick the dumpster up, if you do not see any prohibited items upon pickup but later find them when dumping please still upload a photo of the items under the Prohibited Photo section. 
+                <br/><br/>
+            </p>
+                
+                
+                
+                <table border="0" column="5" cellspacing="0" style="font-size:85%;font-family:Arial;line-height:115%;">
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            a)  Tires, 
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            h)  Medical Waste, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            o)  Refrigerators, 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            b)  Automotive, 
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            i)  Freon Items, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            p)  Computer Monitors, 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            c)  Batteries,  
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            j)  Liquids, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            q)  Mattresses,  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            d)  Wet Paint,   
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            k)  Flammables, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            r)  Light Bulbs,  
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            e)  Paint Cans / Buckets,    
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            l)  Propane Tanks,  
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            s)  Food Waste,   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            f)  Oil,     
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            m)  Electronics, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            t)  Weathered Ties     
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            g)  Hazardous Materials     
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            n)  TVs,  
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+                
+                 <p style="font-size:85%;font-family:Arial;line-height:115%;" >
+                <br/>
+                8. Never tell a customer or anyone, where we take the dumpsters to be emptied, give them the<a href="tel:210-716-0000" target="_blank"> 210-716-0000 </a>number if they need to know.
+                <br/><br/>
+                9. If there is very little trash in a dumpster that you pick up, call Dispatch and send him photos, as we can bring to the office and transfer the waste into a central dumpster to save time at the landfills.
+                <br/><br/>
+                10. Do not inform the dumpster what size it is, just tell them you are bringing them a dumpster.
+                <br/><br/>
+                11. Always check the dumpsters are empty when you pick them up from the office for delivery.
+                <br/><br/>
+                12. When placing the dumpster, always keep in mind how the dumpster is going to be picked up, if you are in a hook truck, allow space for a cable truck to pick up.
+                <br/><br/>
+                13. Don’t ever guesstimate a weight to a customer, as we don’t know what the weight is until we have either weighed it, or Dispatch has seen it / seen pictures.
+                <br/><br/>
+                14. Contact Dispatch if you think the waste can be used in anyway, before dumping e.g. it is mainly concrete, asphalt, rock, gravel, metal etc.
+                <br/><br/>
+                15.  If there is a customer complaint, and they are complaining about damage, the costs will be deducted from the driver’s wages, after negotiation with the driver and the customer. This could lead to dismissal. These will only be deducted if the following apply:
+                <br/><span class="space"></span>a) The damage was not reported by the driver,
+                <br/><span class="space"></span>b) There are no photos uploaded, or they do not prove the damage otherwise,
+                <br/><span class="space"></span>c) Driver negligence / repeat error.
+                <br/><br/>
+                16. If you are unable to make it to the yard safely, please use the following Tire repair contacts, choose the one with the faster eta to you (always drive to their location rather than calling them out, if you can):
+                <br/><span class="space"></span>a) Colan Tire,<a href="http://maps.google.com/maps?q=,Conlan Tire Co., Northeast Interstate 410 Loop, San Antonio, TX 78219, USA" target="_blank"> 8652 NE Loop 410, Ste 115, San Antonio, TX 78219</a> - <a href="tel:726-888-6670" target="_blank">726-888-6670</a>, <a href="tel:833-445-0160" target="_blank">833-445-0160</a>
+                <br/><span class="space"></span>b) Tonnelle Tire Service <a href="tel:210-359-3359" target="_blank">210-359-3359</a> or <a href="tel:210-359-8359" target="_blank">210-359-8359 </a>at <a href="http://maps.google.com/maps?q=29.439273308574133, -98.38192571197773" target="_blank">5519 I-10 Frontage Rd, San Antonio, TX 78219</a>.
+                <br/><span class="space"></span>c) Southern Tire Mart account number 0506240:<a href="tel:877-786-8473" target="_blank"> 877-786-8473</a>
+                <br/><span class="space"></span>d) At Anytime Tire Services, <a href="tel:(210) 682-5217" target="_blank">(210) 682-5217</a> at <a href="http://maps.google.com/maps?q=At Anytime Tire Services,815 John Adams Dr, San Antonio, TX 78228." target="_blank">815 John Adams Dr, San Antonio, TX 78228</a>.
+                <br/><span class="space"></span>e) Colan Tire, <a href="http://maps.google.com/maps?q=30.29039,-97.63400" target="_blank">8200 Bagby Dr, Austin, TX 78724</a> located in the back lot of Central Transport, Mike Dugger <a href="tel:512-497-2342" target="_blank">512-497-2342</a>
+                <br/><span class="space"></span>f) J &amp; I Tire Services Inc,<a href="http://maps.google.com/maps?q=30.09195,-97.70233" target="_blank"> 6610 FM1327, Austin, TX 78747</a>. <a href="tel:(512) 923-0071" target="_blank">(512) 923-0071</a>
+                <br/><br/>
+                17.Mechanics: Contento Truck Repair,<a href="http://maps.google.com/maps?q=30.15602,-97.67517" target="_blank"> 9906 FM812, Austin, 78719</a>.<a href="tel:512-696-3397" target="_blank"> 512-696-3397</a>.
+                <br/><br/>
+                18. Windshield repair Rock Guard Auto Glass,<a href="tel:210-816-8411" target="_blank"> 210-816-8411</a> or<a href="tel:210-844-1216" target="_blank"> 210-844-1216</a>
+                Austin - Campus Auto Glass <a href="tel:512-552-6502" target="_blank">512-552-6502</a>, Abbey Rowe Auto Glass of Austin<a href="tel:512-501-2014" target="_blank"> 512-501-2014</a>, Fix 5 Austin <a href="tel:512-994-0988" target="_blank">512-994-0988</a>
+                <br/><br/>
+                19. Towing – Pinx<a href="tel:210-307-0095" target="_blank"> 210-307-0095</a>, Hawkins Towing <a href="tel:210-624-3535" target="_blank">210-624-3535</a>, Roadrunner <a href="tel:210-658-8610" target="_blank">210-658-8610 </a>or Mission Wrecker Service<a href="tel:210-341-0333" target="_blank"> 210-341-0333</a> / <a href="tel:800-372-5060" target="_blank">800-372-5060</a> Austin - Eagle Towing<a href="tel:512-255-4441" target="_blank"> 512-255-4441</a>,<a href="tel: 512-948-1613" target="_blank"> 512-948-1613</a>, Greg’s Wrecker Service<a href="tel: 512-592-2461" target="_blank"> 512-592-2461</a>, Southside Wrecker<a href="tel:512-441-7094" target="_blank"> 512-441-7094</a> or Austin Towing<a href="tel: 512-953-5427" target="_blank"> 512-953-5427</a> 
+                <br/><br/>
+                20. No passengers or pets etc are authorized to travel with you, unless prior approval has been obtained from Dispatch. No smoking, vaping or similar inside the cab at any time.
+                <br/><br/>
+                21. Do not drive at the landfills with the dumpster door left open - this causes the door hinges to bend and makes them difficult to close. It's okay to pull to the side and close the door, so you don't have to walk over the trash, but please do not drive along the entrance / exit routes with the door open. 
+                <br/><br/>
+                22. Any wreck / incident, great or very small, that happens, should be immediately reported to your line manager, complete with photos and the insurance details of the other party. 
+                <br/><br/>
+                23. Refuel at the Haulbrooke yard as a preference, or use this link for field refueling locations: <a href="https://sitelocator.fleetcor.com/fuelman/">https://sitelocator.fleetcor.com/fuelman/</a>
+                <br/><br/>
+                24. Driver Checklist - Please Note:  These guidelines are provided as a basic outline of the typical steps to follow.  There are many other problems or unexpected things that could come up – always be on the lookout.  Remember to use your own common sense and if in doubt, always call your immediate supervisor with any questions. 
+                     <br/>Remember: Safety is our #1 priority! 
+                     <br/><b>A) Dumpster Pickup:</b>
+                     <br/>1) Check area for any hazards such as low cables, branches, fences, etc.   
+                     <br/>2) Ensure the dumpster door is closed and secured.  Ensure there is nothing hanging over the sides of the dumpster and that it is not overloaded.
+                     <br/>3) Upload a Dumpster Content Photo
+                     <br/>4) Turn your PTO on and pick up the dumpster.
+                     <br/>5) Cable pull truck: strap the rear of the dumpster down or check the wings are under the brackets.
+                     <br/>6) Tarp the dumpster.          
+                     <br/>7) Turn your PTO off, check for hazards and drive away.
+                     <br/><b>B) Emptying the Dumpster:
+                     <br/><span class="space"></span><span class="space"></span><span class="space"></span>Any dumpster that gets emptied, depending on what type of load it is, must have one of the following to close off the record: Load photo, receipt or ticket.</b>
+                     <br/>1) Proceed to the landfill as Directed on Salesforce.
+                     <br/>2) Drive onto the scales.     
+                     <br/>3) Receive the tickets, write your trip HBD number on it, sign the other one and return. At some landfills you will need to, weigh in, and weigh out for your receipt.       
+                     <br/>4) Drive around to the current dumping site, turn your PTO on, remove your tarp, then remove your chain, then open the dumpster door and secure it open, and empty the load.             
+                     <br/>5) Turn your PTO off, check for hazards and drive away. 
+                     <br/>6) Close the dumpster door, secure the chain, and lock it.
+                     <br/>7) Any contents not allowed at the landfills, that get put back in the dumpster – upload a clear photo to the Prohibited Photo section on salesforce.
+                     <br/>8) Take a photo of your landfill receipt and upload it to the trip you are on.
+                     <br/><b>C) Drop Off Deliveries:</b>
+                     <br/>1) When you are on the way to deliver a dumpster, call the customer to provide ETA and to confirm drop off location.  (Customer phone number and drop off location are on the record.)  
+                     <br/>2) Check area for any hazards such as low cables, branches, fences, etc.  Do not drive on any grass – this is because it is easy to sink and get stuck either now at drop off, or later when we pick up the dumpster as it is heavier. 
+                     <br/>3) If you have a cable pull truck, remove the rear straps. 
+                     <br/>4) Turn your PTO on and drop the dumpster in the designated area.            
+                     <br/>5) Turn your PTO off.          
+                     <br/>6) If you have a cable pull truck, secure the straps onto the cable and tighten             
+                     <br/>7) Take a photo of the dumpster ID and a photo of the dumpster’s surrounding area and upload to the record at the exact location you drop the dumpster. This helps locate the dumpster upon pickup.
+ 
+                     <br/><br/>     
+                25. In working for Haulbrooke, and receiving wages, you are agreeing to these terms and conditions. 
+                <br/><br/>
+               
+              
+            </p> 
+            </div>
+        </div>
+    </aura:if>
+    <!-- Model Box Start -->    
+    <aura:if isTrue="{!v.isOpenh}">
+        <div class="slds-modal__content slds-p-around_large modal-body2" id="modal-content-id-1">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0" />
+            <div class="header">
+                <table border="0" width="{!if($User.UITheme == 'Theme4t','100%','100%')}" cellspacing="0">
+                    <tr>
+                        <td width="17%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            <img src="{!$Resource.Track_Logo}"  align="left" />
+                        </td>
+                        <td width="66%" style="padding-top:4px;background-color:#ffffff">
+                            <b style="{!if($User.UITheme == 'Theme4t','font-size:5px;','font-size:12px;')}"><center>50009 - WASTE HAULAGE PROCEDURES &amp; RESPONSIBILITIES – HOUSTON</center></b>
+                        </td>
+                        <td width="17%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            <img src="{!$Resource.Track_Logo}"  align="right" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+             <lightning:input name="text-12" width="66%" placeholder="Search.." class ="customInput" aura:id="text-12" value="" type="text" variant="small" onchange="{!c.searchButtonClick}"/>
+        <div id="realTimeContents">
+            <p style="font-size:85%;font-family:Arial;line-height:116%;" > 
+                <br/>
+                1. For support call or text the Haulbrooke Employee Support line: <a href="tel:210-468-8033" target="_blank">210-468-8033</a>.
+                <br/><br/>
+                2.  Photos solve questions &amp; problems, please take them to provide to dispatch – some examples below:
+                <br/><span class="space"></span>a) Dumpster location
+                <br/><span class="space"></span>b) Photo of the dumpster ID,
+                <br/><span class="space"></span>c) Any accidents or tire scuffs on the property or neighboring properties,
+                <br/><span class="space"></span>d) Any trash that falls out when loading / tarping the dumpster,
+                <br/><span class="space"></span>e) Any obvious damage / graffiti to the dumpster since it has been there,
+                <br/><span class="space"></span>f) Any contents not allowed at the landfills. 
+                <br/><span class="space"></span>g) Photos you take on your phone can be deleted 24 hours later. 
+                
+                <br/><br/>
+                3. A dash camera is fitted for your protection. If the camera is found to be off, missing or damaged, the cost of the unit will be deducted from your pay ($450), to avoid this, report immediately to Dispatch if you see the camera is missing/damaged.
+                <br/><br/>
+                4. You will receive communication via text daily from the office, but texting and driving is not permitted. Make sure your cell phone is within close enough proximity that it is operable while the driver is restrained by properly installed and adjusted seat belts - where you are able to initiate, answer, or terminate a call by touching a single button. Use an earpiece or the speaker phone function. Use voice-activated dialing. Use the hands-free feature. No reaching, no holding, no dialing, no texting, no reading.
+                <br/><br/>
+                5.  Ensure the dumpster is secured on the truck before moving. That includes the rear of the dumpster wings being under the hold brackets, and / or the rear of the dumpster being secured by straps or a chain.
+                <br/><br/>
+                6.	Please use this link to view locations to empty at:<a href="https://www.google.com/maps/d/u/0/edit?mid=17HU0aM346Glx86-3taWi1PRAKNWJW_s&amp;usp=sharing" target="_blank"> https://www.google.com/maps/d/u/0/edit?mid=17HU0aM346Glx86-3taWi1PRAKNWJW_s&amp;usp=sharing </a>
+               
+               <br/><br/>
+                7.  Prohibited Items – in our customer terms and conditions we ask for them not to put the following items into our dumpsters, if you do see any of these items in there, please upload a photo showing what’s in the dumpster under the Prohibited Photos section  – send this before you pick the dumpster up, if you do not see any prohibited items upon pickup but later find them when dumping please still upload a photo of the items under the Prohibited Photo section. 
+                <br/><br/>
+            </p>
+                <table border="0" column="5" cellspacing="0" style="font-size:85%;font-family:Arial;line-height:116%;">
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            a)  Tires, 
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            h)  Medical Waste, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            o)  Refrigerators, 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            b)  Automotive, 
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            i)  Freon Items, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            p)  Computer Monitors, 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            c)  Batteries,  
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            j)  Liquids, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            q)  Mattresses,  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            d)  Wet Paint,   
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            k)  Flammables, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            r)  Light Bulbs,  
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            e)  Paint Cans / Buckets,    
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            l)  Propane Tanks,  
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            s)  Food Waste,   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            f)  Oil,     
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            m)  Electronics, 
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            t)  Weathered Ties     
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                            g)  Hazardous Materials     
+                        </td>
+                        <td width="33%" style="padding-top:4px;background-color:#ffffff">
+                            n)  TVs,  
+                        </td>
+                        <td width="33%" style="background-color:#ffffff;border-right:0px;border-left:0px;">
+                        </td>
+                    </tr>
+                    
+                </table>
+            <p style="font-size:85%;font-family:Arial;line-height:116%;" > 
+                <br/>
+                
+                8. Never tell a customer or anyone, where we take the dumpsters to be emptied, give them the <a href="tel:210-716-0000" target="_blank">210-716-0000</a> number if they need to know.
+                <br/><br/>
+                9. If you are delayed on a customer site for any reason, call your dispatcher to inform them, so we can process a wait charge. If you are unable to deliver or pickup a dumpster, please call the onsite contacts to inform them, and see if they have a resolution – do this regardless of the time of day, as even if they do not answer, we need proof of trying to call so we can charge a dry run fee.
+                <br/><br/>
+                10. If there is very little trash in a dumpster that you pick up, call your dispatcher and send them photos, as we can bring to the yard and transfer the waste into a central dumpster to save time at the landfills.
+                <br/><br/>
+                11. Always check the dumpsters are empty when you pick them up from the yard for delivery.
+                <br/><br/>
+                12. When placing the dumpster, always keep in mind how the dumpster is going to be picked up, if you are in a hook truck, allow space for a cable truck to pick up.
+                <br/><br/>
+                13. Don’t ever guesstimate a weight to a customer, or provide them with your on board scale reading, as we don’t know what the weight is until we have either weighed it, or your dispatched has seen it / seen pictures. 
+                <br/><br/>
+                14. Contact your dispatcher if you think the waste can be used in anyway, before dumping e.g. it is mainly concrete, asphalt, rock, gravel, metal etc.
+                <br/><br/>
+                15.  If there is a customer complaint, and they are complaining about damage, the costs will be deducted from the driver’s wages, after negotiation with the driver and the customer. This could lead to dismissal. These will only be deducted if the following apply:
+                <br/><span class="space"></span><span class="space"></span>a) The damage was not reported by the driver,
+                <br/><span class="space"></span><span class="space"></span>b) There are no photos uploaded, or they do not prove the damage otherwise,
+                <br/><span class="space"></span><span class="space"></span>c) Driver negligence / repeat error.
+                <br/><br/>
+                16. Tire repairs contact (always drive to their location rather than calling them out, if you can):
+                <br/><span class="space"></span><span class="space"></span>a) DH Tire   <a href="mailto:igarza@dhtire.com">igarza@dhtire.com</a>,<a href="mailto: rgarcia@dhtire.com"> rgarcia@dhtire.com</a> <a href="tel:713-675-8473" target="_blank"> 713-675-8473</a>  Out of Hours Contact -<a href="tel:713-423-4166" target="_blank"> 713-423-4166</a> or<a href="tel:832-955-4910" target="_blank"> 832-955-4910</a>, <a href="http://maps.google.com/maps?q=29.79406,-95.27493" target="_blank">3611 N McCarty St, Houston, TX, 77029</a>
+                <br/><span class="space"></span><span class="space"></span>b) Southern Tire Mart – <a href="tel:877-786-8473" target="_blank">877-786-8473</a>: <a href="http://maps.google.com/maps?q=29.79030,-95.26429" target="_blank">9252 Wallisville Rd, Houston, 77013</a>. <a href="http://maps.google.com/maps?q=29.78899,-95.80048" target="_blank">1150 D Katy Fort Bend Rd, Katy, 77493</a>.
+                <br/><span class="space"></span><span class="space"></span>c) Colan Tire, <a href="http://maps.google.com/maps?q=29.79086,-95.27629" target="_blank">3300 N McCarty St, Houston, TX 77029 </a>– <a href="tel:346-388-1601" target="_blank">346-388-1601</a>,<a href="tel:833-445-0160" target="_blank"> 833-445-0160</a><br/>
+                <br/><a href="http://maps.google.com/maps?q=29.65269,-95.06158" target="_blank">10941 W Fairmont Pkwy, La Porte, 77571</a>        
+                <br/><span class="space"></span><span class="space"></span>d) Diaz Tire Service Co,<a href="http://maps.google.com/maps?q=29.74472,-95.32767" target="_blank"> 217 S Lockwood Dr, Houston, 77011</a>. <a href="tel:832-988-4642" target="_blank">832-988-4642</a>
+                <br/><span class="space"></span><span class="space"></span>e) Wheel Alignment: Allende Alignment &amp; Tires, <a href="http://maps.google.com/maps?q=29.82590,-95.22444" target="_blank">11922 Beaumont Hwy </a>– <a href="tel:281-741-5575" target="_blank">281-741-5575</a>
+                <br/><br/>
+                17. Mechanics: Americorp Diesel Repair <a href="tel:713-683-1933" target="_blank">713-683-1933</a>, <a href="tel:956-480-5673" target="_blank">956-480-5673</a> 24/7 <a href="http://maps.google.com/maps?q=29.84043,-95.43057" target="_blank">3339 Pinemont Dr 77018</a> <br/>
+                <a href="mailto:americorpdiesel@yahoo.com">americorpdiesel@yahoo.com</a> <br/>
+                Saucedo’s Truck &amp; Trailer Repair,<a href="http://maps.google.com/maps?q=30.05321,-95.42501" target="_blank"> 622 E Cypresswood Dr, Spring, TX 77373</a>. <a href="tel:832-893-9540" target="_blank">832-893-9540</a><br/>
+                FleetWorks of Texas, <a href="http://maps.google.com/maps?q=29.54897,-95.17836" target="_blank">4402 Rex Rd, Friendswood, TX 77546</a>.<a href="tel:281-485-4665" target="_blank"> 281-485-4665</a>, <a href="mailto:dispatch@fleetworkstexas.com">dispatch@fleetworkstexas.com</a><br/>
+
+                J&amp;J Containers Mechanic - Elvin – <a href="tel:626-486-8683" target="_blank">626-486-8683</a> <br/>                
+                Mobile Mechanic Eddie – <a href="tel:832-420-2013" target="_blank">832-420-2013</a><br/>
+                Marco's Truck Tarps, <a href="http://maps.google.com/maps?q=29.72360,-95.52864" target="_blank">3739 Ocee St, Houston, TX 77063</a> - <a href="tel:713-398-2055" target="_blank">713-398-2055</a><br/>
+                Houston Truck Tarps, <a href="http://maps.google.com/maps?q=3421 Manitou Dr, Houston, 77013" target="_blank">3421 Manitou Dr, Houston, 77013</a> – <a href="tel:346-571-1832" target="_blank">346-571-1832</a><br/>
+                Louis Roadside Service – <a href="tel:832-382-3131" target="_blank">832-382-3131</a><br/>
+                Road Runner Mobile Truck &amp;Trailer Repair<a href="tel:(832) 480-1217" target="_blank"> (832) 480-1217</a>,<a href="tel:832-210-5817" target="_blank"> 832-210-5817</a> <br/>
+                <br/><br/>
+                18. Truck alignments: Allende Alignment &amp; Tires,<a href="http://maps.google.com/maps?q=29.825897167487007, -95.22444657092726" target="_blank"> 11922 Beaumont Hwy, Houston, TX 77049</a>. <a href="tel:281-741-5575" target="_blank">281-741-5575</a> 
+                <br/><br/>
+                19. Hydraulic Hose repair:  <a href="http://maps.google.com/maps?q=29.86557,-95.58509" target="_blank">Hose Tech USA, 11755 W Little York Rd BLG 5, Houston, TX 77041</a>. <a href="tel:713-465-6675" target="_blank">713-465-6675</a>
+                <br/><span class="space"></span><span class="space"></span><span class="space"></span><span class="space"></span><span class="space"></span><span class="space"></span><span class="space"></span><span class="space"></span><span class="space"></span><span class="space"></span><span class="space"></span><span class="em-space"></span><span class="em-space"></span>
+                Tubing &amp; Metric Hydraulics,<a href="http://maps.google.com/maps?q=29.43025,-95.21926" target="_blank"> 860 FM517, Alvin, TX 77511</a>.  <a href="tel:281-331-1600" target="_blank">281-331-1600</a>
+                <br/><br/>
+                20. Windshield repair: BinSwanger Glass  <a href="tel:800-385-0479" target="_blank">800-385-0479</a>  Tiffany Brown <a href="mailto:tbrown@binswangerglass.com">tbrown@binswangerglass.com</a>
+                or A+ Auto Glass, <a href="http://maps.google.com/maps?q= 1213 Shepherd Dr, Houston, 77007" target="_blank">1213 Shepherd Dr, Houston, 77007</a> <a href="mailto:houstonautoglassco@gmail.com">houstonautoglassco@gmail.com</a>,  <a href="tel:281-871-0493" target="_blank">281-871-0493</a>,  <a href="tel:281-768-0624" target="_blank">281-768-0624</a>
+                <br/><br/>
+                21. Towing – <a href="http://maps.google.com/maps?q=29.66889,-95.40080" target="_blank">Apple Towing, 2030 Holmes Road  </a>  <a href="tel:713-383-6200" target="_blank">713-383-6200 </a> 24/7  <a href="mailto:dispatch@appletowing.com">dispatch@appletowing.com</a><br/>
+                CRB Towing LLC  <a href="tel:832-771-5331" target="_blank">832-771-5331</a><br/>
+                Priority Towing  <a href="tel:713-772-7728" target="_blank">713-772-7728</a><br/>
+                <br/><br/> 
+                22.  Locksmith, Unlock Car Trunk Pearland –  <a href="tel:281-310-0809" target="_blank">281-310-0809</a> or 24/7 Mobile Locksmith –  <a href="tel:713-623-3637" target="_blank">713-623-3637</a>
+                <br/><br/>
+                23. No passengers or pets etc are authorized to travel with you, unless prior approval has been obtained from your dispatcher. No smoking, vaping or similar inside the cab at any time.
+                <br/><br/>
+                24. Do not drive at the landfills with the dumpster door left open - this causes the door hinges to bend and makes them difficult to close. It's okay to pull to the side and close the door, so you don't have to walk over the trash, but please do not drive along the entrance / exit routes with the door open. 
+                <br/><br/>
+                25. Any wreck / incident, great or very small, that happens, should be immediately reported to your line manager, complete with photos and the insurance details of the other party. 
+                <br/><br/>
+                26. Please use this link for field refueling locations: <a href="https://sitelocator.fleetcor.com/fuelman/">https://sitelocator.fleetcor.com/fuelman/</a>
+                <br/><br/>
+                27.  Driver Checklist - Please Note:  These guidelines are provided as a basic outline of the typical steps to follow.  There are many other problems or unexpected things that could come up – always be on the lookout.  Remember to use your own common sense and if in doubt, always call your immediate supervisor with any questions.  
+                <br/>Remember: Safety is our #1 priority! 
+                <br/> <b>A) Dumpster Pickup:</b>
+                     <br/>1) Check area for any hazards such as low cables, branches, fences, etc.   
+                     <br/>2) Ensure the dumpster door is closed and secured.  Ensure there is nothing hanging over the sides of the dumpster and that it is not overloaded.
+                     <br/>3) Upload a Dumpster Content Photo
+                     <br/>4) Turn your PTO on and pick up the dumpster.
+                     <br/>5) Cable pull truck: strap the rear of the dumpster down or check the wings are under the brackets.
+                     <br/>6) Tarp the dumpster.          
+                     <br/>7) Turn your PTO off, check for hazards and drive away. 
+                <br/><b>B) Emptying the Dumpster:
+                <br/><span class="space"></span><span class="space"></span><span class="space"></span>Any dumpster that gets emptied, depending on what type of load it is, must have one of the following to close off the record: Load photo, receipt or ticket.</b>
+                     <br/>1) Proceed to the landfill as Directed on Salesforce.
+                     <br/>2) Drive onto the scales.     
+                     <br/>3) Receive the tickets, write your trip HBD number on it, sign the other one and return. At some landfills you will need to, weigh in, and weigh out for your receipt.       
+                     <br/>4) Drive around to the current dumping site, turn your PTO on, remove your tarp, then remove your chain, then open the dumpster door and secure it open, and empty the load.             
+                     <br/>5) Turn your PTO off, check for hazards and drive away. 
+                     <br/>6) Close the dumpster door, secure the chain, and lock it.
+                     <br/>7) Any contents not allowed at the landfills, that get put back in the dumpster – upload a clear photo to the Prohibited Photo section on salesforce.
+                     <br/>8) Take a photo of your landfill receipt and upload it to the trip you are on.
+                <br/><b> C) Drop Off Deliveries:</b>
+                     <br/>1) When you are on the way to deliver a dumpster, call the customer to provide ETA and to confirm drop off location.  (Customer phone number and drop off location are on the record.)  
+                     <br/>2) Check area for any hazards such as low cables, branches, fences, etc.  Do not drive on any grass – this is because it is easy to sink and get stuck either now at drop off, or later when we pick up the dumpster as it is heavier. 
+                     <br/>3) If you have a cable pull truck, remove the rear straps. 
+                     <br/>4) Turn your PTO on and drop the dumpster in the designated area.            
+                     <br/>5) Turn your PTO off.          
+                     <br/>6) If you have a cable pull truck, secure the straps onto the cable and tighten             
+                     <br/>7) Take a photo of the dumpster ID and a photo of the dumpster’s surrounding area and upload to the record at the exact location you drop the dumpster. This helps locate the dumpster upon pickup.
+                <br/><br/>
+                28. In working for Haulbrooke, and receiving wages, you are agreeing to these terms and conditions. 
+                <br/><br/>
+                
+               
+                
+            </p>  
+            </div>
+        </div>
+    </aura:if>
+    
+    	
+</aura:component>
